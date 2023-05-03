@@ -33,12 +33,12 @@ export default () => {
 
   const option = isIo ? options[0] : options[1];
 
-  const { map, total, initialData } = getConfig(isIo);
+  const { list, total, initialData } = getConfig(isIo);
   const [formData, setFormData] = useState(initialData);
   const currentFormValue = formData[`step${step}`];
 
   //console.log("currentFormValue", currentFormValue);
-  const currentFormConfig = map.get(step);
+  const currentFormConfig = list[step];
   const isToSubmit = step === total - 1;
 
   useEffect(() => {
