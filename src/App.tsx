@@ -14,6 +14,7 @@ import IoForm from "./components/IoForm";
 import { Confirm } from "./components/Confirm";
 import { desc, title, options, getConfig } from "./config";
 import './App.css'
+import { addFamily } from "./api";
 export const stepperStyle = {
   width: 120
   // marginLeft: -10
@@ -38,7 +39,7 @@ export default () => {
   const currentFormValue = formData[`step${step}`];
 
   //console.log("currentFormValue", currentFormValue);
-  const currentFormConfig = list[step];
+  const currentFormConfig = list[step]||{title:''};
   const isToSubmit = step === total - 1;
 
   useEffect(() => {
@@ -66,7 +67,7 @@ export default () => {
     ioForm
       .validateFields()
       .then((val) => {
-        console.log(11, val);
+        // console.log(11, val);
         setMemoFormData(val);
         ioForm.resetFields();
         go();
@@ -92,11 +93,18 @@ export default () => {
 
   function onTypeChange(params) {
     setType(params);
+    setStep(0)
   }
 
   function onSubmit(val) {
     console.log(11, val, formData);
     localStorage.setItem(type[0], JSON.stringify(formData));
+
+    addFamily({
+      Mobile:val.mobile,
+      Wechat:val.wechat,
+      JsonData:formData
+    },isIo)
     Toast.show({
       icon: "success",
       content: "提交成功"
