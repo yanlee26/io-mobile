@@ -11,7 +11,7 @@ export function getId() {
   return id;
 }
 
-export default ({
+export default function IoForm({
   form,
   initialValues,
   config,
@@ -21,7 +21,7 @@ export default ({
   initialValues: any;
   config: any;
   step: number;
-}) => {
+}) {
   return (
     <div className="form-container">
       <Form mode="card" form={form} initialValues={initialValues}>
@@ -47,32 +47,3 @@ export default ({
     </div>
   );
 };
-
-/**
-        {config.addons?.map((x, idx) => (
-          <Form.Item
-            name={x.name}
-            layout="horizontal"
-            label={x.label + (1 + idx)}
-            key={x.id}
-            style={{ height: 53 }}
-          >
-            <Stepper style={stepperStyle} />
-            <CloseOutline
-              color="var(--adm-color-danger)"
-              style={{
-                float: "right",
-                position: "relative",
-                left: -10,
-                top: -24
-              }}
-              onClick={() => remove(x.id)}
-            />
-          </Form.Item>
-        ))}
-
-    <Button color="primary" block fill="outline" onClick={add}>
-        <AddCircleOutline /> 添加
-      </Button>
-
-*/
