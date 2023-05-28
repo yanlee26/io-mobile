@@ -27,7 +27,7 @@ export function Confirm({ open, setOpen, onSubmit }: ConfirmType) {
       content={
         <Form form={form}>
           <Form.Header>
-            为了工作人员为您提供更有针对性的服务，请留下您的手机号。
+            为了工作人员为您提供更有针对性的服务，请留下您的手机号与微信昵称。
           </Form.Header>
           <Form.Item
             name="mobile"
@@ -41,12 +41,12 @@ export function Confirm({ open, setOpen, onSubmit }: ConfirmType) {
           </Form.Item>
           <Form.Item
             name="wechat"
-            label="微信号"
+            label="微信昵称"
             rules={[
               { required: true },
               {
                 pattern: /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/,
-                message: "请输入正确格式的微信号"
+                message: "请输入正确格式的微信昵称"
               }
             ]}
           >

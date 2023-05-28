@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Stepper } from "antd-mobile";
 
 
@@ -22,13 +22,22 @@ export default function IoForm({
   config: any;
   step: number;
 }) {
+
+  useEffect(() => {
+    // sync first
+    form.setFieldsValue(initialValues);
+    return ()=>form.resetFields()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(initialValues)]);
+
+  console.log(initialValues);
   return (
     <div className="form-container">
       <Form mode="card" form={form} initialValues={initialValues}>
         {config.items?.map((x, idx) => (
           <Form.Item
-            name={`${step}item${idx}`}
             layout="horizontal"
+            name={`${step}item${idx}`}
             label={x.label}
             key={idx}
             // required

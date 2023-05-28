@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Toast,
   Card,
@@ -38,24 +38,16 @@ export default () => {
   const [formData, setFormData] = useState(initialData);
   const currentFormValue = formData[`step${step}`];
 
-  //console.log("currentFormValue", currentFormValue);
   const currentFormConfig = list[step] || { title: '' };
   const isToSubmit = step === total - 1;
 
   useEffect(() => {
     const str = localStorage.getItem(typeKey);
-    const json = JSON.parse(str);
+    const json = JSON.parse(str)||{};
     // console.log("json", json);
-    if (json) {
-      setFormData(json);
-    }
+    setFormData(json);
   }, [typeKey]);
 
-  useEffect(() => {
-    // sync first
-    ioForm.setFieldsValue(currentFormValue);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(currentFormValue)]);
 
   function setMemoFormData(values) {
     setFormData((pre) => ({
@@ -68,7 +60,6 @@ export default () => {
     ioForm
       .validateFields()
       .then((val) => {
-        // console.log(11, val);
         setMemoFormData(val);
         ioForm.resetFields();
         go();
@@ -141,6 +132,7 @@ export default () => {
       </div>
       <Card title={currentFormConfig.title + '(万元)'}>
         <IoForm
+          key={typeKey}
           form={ioForm}
           config={currentFormConfig}
           initialValues={currentFormValue}

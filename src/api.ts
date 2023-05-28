@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = process.env.NODE_ENV!=='development' ? 'http://localhost:1357' : 'http://47.96.25.9:1357'
+const url = process.env.NODE_ENV  ==='development' ? 'http://localhost:1357' : 'http://47.96.25.9'
 const instance = axios.create({
   baseURL: url,
   timeout: 5000,

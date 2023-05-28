@@ -58,7 +58,7 @@ export const alItems = [
   },
   {
     title: '流动资产',
-    items: getItems(['现金', '银行存款', '货币基金含余额宝等', '玩']),
+    items: getItems(['现金', '银行存款', '货币基金含余额宝等']),
   },
   {
     title: '其它资产',
